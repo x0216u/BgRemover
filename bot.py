@@ -1,30 +1,29 @@
-from flask import Flask, request
+from flask import Flask, request, jsonify
 from os import remove
 from time import sleep
 import telebot
 from utilities import *
 from local_data import *
 
-# Set proxy
-telebot.apihelper.proxy = {
-  'https': PROXY
-}
+# # Change url
+# telebot.apihelper.API_URL = "https://telegg.ru/orig/bot/"
+# telebot.apihelper.FILE_URL = "https://telegg.ru/orig/file/bot/"
 
 # Connect to bot and add proxy
 secret = TOKEN
 bot = telebot.TeleBot(secret, threaded=False)
 bot.remove_webhook()
-bot.set_webhook(url="https://25d54f6d.ngrok.io/bot/{}".format(TOKEN))
-print(bot.get_me())
+# bot.set_webhook(url="https://3375105e.ngrok.io/bot/{}".format(TOKEN))
+# print(bot.get_me())
 
-app = Flask(__name__)
-@app.route('/bot/{}'.format(secret), methods=["POST"])
-def webhook():
-    print('Server sleep...')
-    json_string = request.get_json()
-    update = telebot.types.Update.de_json(json_string)
-    bot.process_new_updates([update])
-    return "ok"
+# app = Flask(__name__)
+# @app.route('/bot/{}'.format(secret), methods=["POST"])
+# def webhook():
+#     json_string = request.get_json()
+#     update = telebot.types.Update.de_json(json_string)
+#     bot.process_new_updates([update])
+#     resp = jsonify(success=True)
+#     return resp
 
 # Helper
 @bot.message_handler(commands=['start', 'help'])
@@ -55,4 +54,5 @@ def echo_message(message):
         sleep(0.5)
 
 
-app.run()
+# app.run()
+bot.polling()
