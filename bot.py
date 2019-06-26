@@ -22,13 +22,12 @@ def webhook():
     bot.process_new_updates([update])
     return "ok"
 
-# Messages handlers
+# Helper
 @bot.message_handler(commands=['start', 'help'])
 def info_message(message):
-    bot.send_message(message.chat.id, text='''Привет, данный бот может удалить задний фон у фотографии, оставив только человека.''')
-    example = open('s6.jpg', 'rb')
-    bot.send_photo(message.chat.id, example)
+    bot.send_message(message.chat.id, text='''Hi, this bot can remove background from photos.''')
 
+# Get file
 @bot.message_handler(func=lambda message: True, content_types=['text'])
 def echo_message(message):
     print('get message')
