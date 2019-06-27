@@ -5,4 +5,6 @@ Telegram bot for remove background from photos.
 
 <img src="https://github.com/Fanraeen/BgRemover/blob/master/0jWNCOq3PhQ.jpg?raw=true" alt="BgRemover">
 
+Implemented on <a href="https://www.remove.bg/api">api</a>
+
 
